@@ -63,11 +63,17 @@ export default {
         alert('Error: ' + response.status)
       }
     },
+    sortingDown(param) {
+      this.json.sort((a, b) => (a[param] > b[param]) ? 1 : (b[param] > a[param]) ? -1 : 0)
+    },
+    sortingUp(param) {
+      this.json.sort((a, b) => (a[param] > b[param]) ? -1 : (b[param] > a[param]) ? 1 : 0)
+    },
     sort(param) {
       if(this.sortingColumns[param]) {
-        this.json.sort((a, b) => (a[param] > b[param]) ? 1 : (b[param] > a[param]) ? -1 : 0)
+        this.sortingDown(param)
       } else {
-        this.json.sort((a, b) => (a[param] > b[param]) ? -1 : (b[param] > a[param]) ? 1 : 0)
+        this.sortingUp(param)
       }
       this.sortingColumns[param] = !this.sortingColumns[param]
       this.mainKey = param
@@ -76,9 +82,9 @@ export default {
       this.step += 10
       await this.getData()
       if(!this.sortingColumns[this.mainKey]) {
-        this.json.sort((a, b) => (a[this.mainKey] > b[this.mainKey]) ? 1 : (b[this.mainKey] > a[this.mainKey]) ? -1 : 0)
+        this.sortingDown(this.mainKey)
       } else {
-        this.json.sort((a, b) => (a[this.mainKey] > b[this.mainKey]) ? -1 : (b[this.mainKey] > a[this.mainKey]) ? 1 : 0)
+        this.sortingUp(this.mainKey)
       }
     }
   },
