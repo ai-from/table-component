@@ -21,6 +21,7 @@
     <Button
       title="Загрузить еще..."
       @click="upload"
+      v-if="json.length"
     />
 
   </div>
@@ -99,12 +100,21 @@ export default {
   display: grid
   grid-template-rows: repeat(2, min-content)
   grid-row-gap: 10px
+  margin-bottom: 50px
   &__head
     display: grid
-    grid-template-columns: repeat(4, 1fr)
+    grid-template-columns: 100px 100px repeat(2, 1fr)
     grid-column-gap: 10px
+    > div
+      cursor: pointer
+      border: 1px solid black
+      padding: 16px
+      background: rgba(orangered, .7)
   &__item
     display: grid
-    grid-template-columns: repeat(4, 1fr)
+    grid-template-columns: 100px 100px repeat(2, 1fr)
     grid-column-gap: 10px
+    > div
+      border: 1px solid black
+      padding: 16px
 </style>
